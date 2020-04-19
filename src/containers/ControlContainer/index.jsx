@@ -21,7 +21,7 @@ class ControlContainer extends Component {
             <div>
                 <button onClick={ () => this.endTurnHandleCLick() }>END TURN</button>
                 <Dice />
-                <Auction />
+                <Auction properties={ this.props.properties }/>
                 <Buy properties={ this.props.properties }/>
             </div>
         )

@@ -7,6 +7,7 @@ class Player {
         this.jail = false
         this.jailroll = 0
         this.properties = []
+        this.firstRoundComplete = false
     }
 
     updatePosition = (value) => {
@@ -19,6 +20,7 @@ class Player {
         } else {
             if (this.position + value >= 40) {
                 this.money += 200
+                this.firstRoundComplete = true
             }
             this.position = (this.position + value) % 40
         }

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Modal } from 'react-bootstrap'
 
-import { hideBuyModal, pay } from '../../redux/actions/game'
+import { hideBuyModal, pay, 
+        showAuctionModal, setAuctionPlayers} from '../../redux/actions/game'
 
 class Buy extends Component {
     constructor(props) {
@@ -37,7 +38,9 @@ class Buy extends Component {
     }
 
     showAuction = () => {
-
+        this.props.showAuctionModal()
+        this.props.setAuctionPlayers()
+        this.props.hideBuyModal()
     }
 
 
@@ -47,7 +50,6 @@ class Buy extends Component {
         const currentPlayer = this.props.gameState.players[currentPlayerID - 1]
         const currentProperty = this.props.properties.properties[currentPlayer.position]
         const canBeBought = this.canBeBought()
-        console.log(this.props)
         return (
             
             <div>
@@ -71,7 +73,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     hideBuyModal,
-    pay
+    pay,
+    showAuctionModal,
+    setAuctionPlayers
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buy)
