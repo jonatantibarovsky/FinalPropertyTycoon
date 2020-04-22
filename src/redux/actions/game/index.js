@@ -5,7 +5,7 @@ export const UPDATE_PLAYER_POSITION = 'UPDATE_PLAYER_POSITION'
 export const SHOW_BUY_MODAL = 'SHOW_BUY_MODAL'
 export const HIDE_BUY_MODAL = 'HIDE_BUY_MODAL'
 export const SHOW_AUCTION_MODAL = 'SHOW_AUCTION_MODAL'
-export const HIDE_AUCTION_MODAL = 'SHOW_AUCTION_MODAL'
+export const HIDE_AUCTION_MODAL = 'HIDE_AUCTION_MODAL'
 export const PAY = 'PAY'
 export const SET_ROLLED_TRUE = 'SET_ROLLED_TRUE'
 export const SET_ROLLED_FALSE = 'SET_ROLLED_FALSE'
@@ -91,10 +91,10 @@ export const setAuctionPlayers = () => {
 	}
 }
 
-export const removeAuctionPlayer = (player) => {
+export const removeAuctionPlayer = (playerID) => {
 	return {
 		type: REMOVE_AUCTION_PLAYER,
-		player: player
+		playerID: playerID
 	}
 }
 

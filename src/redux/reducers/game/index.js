@@ -4,7 +4,7 @@ import { CHANGE_CURRENT_PLAYER, SET_DICE,
 		SHOW_AUCTION_MODAL, HIDE_AUCTION_MODAL,
 		PAY, SET_ROLLED_TRUE,
 		SET_ROLLED_FALSE, SET_AUCTION_PLAYERS,
-		CLEAR_AUCTION_PLAYERS } from '../../actions/game'
+		CLEAR_AUCTION_PLAYERS, REMOVE_AUCTION_PLAYER } from '../../actions/game'
 
 import { Player } from '../../../models/player'
 
@@ -115,6 +115,12 @@ export default (state = initialState, action) => {
 			let playersInAuction = state.players.filter(player => {
 				return player.id !== state.currentPlayer
 			})
+			/* let hashPlayers = playersInAuction.map(player => {
+				return {
+					player: hashPlayers,
+					inAuction: true
+				}
+			}) */
 			return {
 				...state,
 				playersInAuction: playersInAuction
@@ -123,6 +129,14 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				playersInAuction: []
+			}
+		case REMOVE_AUCTION_PLAYER:
+			let updatedAuctionList = state.playersInAuction.filter(player => {
+				return player.id !== action.playerID
+			})
+			return {
+				...state,
+				playersInAuction: updatedAuctionList
 			}
 		default:
 			return state
