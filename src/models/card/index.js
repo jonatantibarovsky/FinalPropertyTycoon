@@ -6,9 +6,9 @@ import { adjustPlayerPosition, getMoney,
         addOpportunityJailcard, addPotluckJailcard } from '../../redux/actions/game'
 
 class Card {
-    constructor(text, money) {
+    constructor(text, method) {
         this.text = text
-        this.money = money
+        this.method = method
     }
 
     adjustPosition = (player) => {
@@ -73,6 +73,25 @@ class Card {
             store.dispatch(addOpportunityJailcard(player))
         } else if (this.text === 'Get out of jail free / Potluck') {
             store.dispatch(addPotluckJailcard(player))
+        }
+    }
+
+    checkMethod = (card, player) => {
+        switch (card.method) {
+            case 1:
+                this.adjustPosition(player)
+                break
+            case 2:
+                this.pay(player)
+                break
+            case 3:
+                this.increaseMoney(player)
+                break
+            case 4:
+                this.addJailCard(player)
+                break
+            default:
+                break
         }
     }
 }

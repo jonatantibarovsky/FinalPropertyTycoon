@@ -16,29 +16,19 @@ class App extends Component {
 
     // modern version of the Fisher-Yates shuffle algorithm
     shuffle = (cards) => {
-        let currentIndex = cards.length
-        let temp
-        let randomIndex
-        // While there ramin elements to shuffle
-        while (currentIndex !== 0) {
-            // Pick a remaining element
-            randomIndex = Math.floor(Math.random() * currentIndex)
-            currentIndex -= 1
-
-            // Swap it wth the current element
-            temp = cards[currentIndex]
-            cards[currentIndex] = cards[randomIndex]
-            cards[randomIndex] = temp
+        for (let i = cards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * i)
+            const temp = cards[i]
+            cards[i] = cards[j]
+            cards[j] = temp
         }
+
         return cards
     }
 
     render() {
-
-        const shuffledPotLucks = this.shuffle(potlucks)
-        const shuffledOpportunityKnocks = this.shuffle(opportunityKnocks)
-        console.log(shuffledPotLucks)
-        console.log(shuffledOpportunityKnocks)
+        const shuffledPotLucks = this.shuffle(potlucks.potlucks)
+        const shuffledOpportunityKnocks = this.shuffle(opportunityKnocks.opportunityKnocks)
         return(
             <div className='board-container'>
                 <GameContainer 

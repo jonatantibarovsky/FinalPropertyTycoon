@@ -21,10 +21,15 @@ class Dice extends Component {
         const currentPlayerID = this.props.gameState.currentPlayer
         let card
         if (square.group === 'bonus' && square.name === 'Pot Luck') {
-            card = this.props.potlucks.potlucks[2]
-            card.adjustPosition(currentPlayerID)
+            card = this.props.potlucks.shift()
+            alert(card.text)
+            card.checkMethod(card, currentPlayerID)
+            this.props.potlucks.push(card)
         } else if (square.group === 'bonus' && square.name === 'Opportunity Knocks') {
-            console.log(square)
+            card = this.props.opportunityKnocks.shift()
+            alert(card.text)
+            card.checkMethod(card, currentPlayerID)
+            this.props.opportunityKnocks.push(card)
         } else if (square.group === 'tax' && square.name === 'Income Tax') {
             console.log(square)
         } else if (square.group === 'tax' && square.name === 'Super Tax') {
