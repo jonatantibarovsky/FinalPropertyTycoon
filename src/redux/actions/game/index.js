@@ -2,16 +2,23 @@ export const CHANGE_CURRENT_PLAYER = 'CHANGE_CURRENT_PLAYER'
 export const SET_DICE = 'SET_DICE'
 export const CHANGE_PLAYERS_NUMBER = 'CHANGE_PLAYERS_NUMBER'
 export const UPDATE_PLAYER_POSITION = 'UPDATE_PLAYER_POSITION'
+export const ADJUST_PLAYER_POSITION = 'ADJUST_PLAYER_POSITION'
 export const SHOW_BUY_MODAL = 'SHOW_BUY_MODAL'
 export const HIDE_BUY_MODAL = 'HIDE_BUY_MODAL'
 export const SHOW_AUCTION_MODAL = 'SHOW_AUCTION_MODAL'
 export const HIDE_AUCTION_MODAL = 'HIDE_AUCTION_MODAL'
 export const PAY = 'PAY'
+export const GET_MONEY = 'GET_MONEY'
 export const SET_ROLLED_TRUE = 'SET_ROLLED_TRUE'
 export const SET_ROLLED_FALSE = 'SET_ROLLED_FALSE'
 export const SET_AUCTION_PLAYERS = 'SET_AUCTION_PLAYERS'
 export const CLEAR_AUCTION_PLAYERS = 'CLEAR_AUCTION_PLAYERS'
 export const REMOVE_AUCTION_PLAYER = 'REMOVE_AUCTION_PLAYER'
+export const ADD_TO_FREE_PARKING = 'ADD_TO_FREE_PARKING'
+export const ADD_POTLUCK_JAILCARD = 'ADD_POTLUCK_JAILCARD'
+export const ADD_OPPORTUNITY_JAILCARD = 'ADD_OPPORTUNITY_JAILCARD'
+export const REMOVE_POTLUCK_JAILCARD = 'REMOVE_POTLUCK_JAILCARD'
+export const REMOVE_OPPORTUNITY_JAILCARD = 'REMOVE_OPPORTUNITY_JAILCARD'
 
 export const changeCurrentPlayer = () => {
     return {
@@ -38,6 +45,14 @@ export const updatePlayerPosition = (playerID, value) => {
 		type: UPDATE_PLAYER_POSITION,
 		value: value,
 		playerID: playerID
+	}
+}
+
+export const adjustPlayerPosition = (playerID, position) => {
+	return {
+		type: ADJUST_PLAYER_POSITION,
+		playerID: playerID,
+		position: position
 	}
 }
 
@@ -69,7 +84,15 @@ export const pay = (playerID, value) => {
 	return {
 		type: PAY,
 		playerID: playerID,
-		value, value
+		value: value
+	}
+}
+
+export const getMoney = (playerID, value) => {
+	return {
+		type: GET_MONEY,
+		playerID: playerID,
+		value: value
 	}
 }
 
@@ -101,5 +124,40 @@ export const removeAuctionPlayer = (playerID) => {
 export const clearAuctionPlayers = () => {
 	return {
 		type: CLEAR_AUCTION_PLAYERS
+	}
+}
+
+export const addToFreeParking = (value) => {
+	return {
+		type: ADD_TO_FREE_PARKING,
+		value: value
+	}
+}
+
+export const addPotluckJailcard = (player) => {
+	return {
+		type: ADD_POTLUCK_JAILCARD,
+		player: player
+	}
+}
+
+export const addOpportunityJailcard = (player) => {
+	return {
+		type: ADD_OPPORTUNITY_JAILCARD,
+		player: player
+	}
+}
+
+export const removePotluckJailcard = (player) => {
+	return {
+		type: REMOVE_POTLUCK_JAILCARD,
+		player: player
+	}
+}
+
+export const removeOpportunityJailcard = (player) => {
+	return {
+		type: REMOVE_OPPORTUNITY_JAILCARD,
+		player: player
 	}
 }

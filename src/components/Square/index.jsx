@@ -37,22 +37,22 @@ class Square extends Component {
     }
 
     getColorForProperty = (index, group) => {
-        if ((this.getClassName(index, group) == 'top') && group == 'red') {
+        if ((this.getClassName(index, group) === 'top') && group === 'red') {
             return <TopColorBlock color/>
-        } else if (this.getClassName(index, group) == 'top') {
+        } else if (this.getClassName(index, group) === 'top') {
             return <TopColorBlock />
-        } else if ((this.getClassName(index, group) == 'bottom') && (group == 'brown')) {
+        } else if ((this.getClassName(index, group) === 'bottom') && (group === 'brown')) {
             return <BottomColorBlock color/>
-        } else if (this.getClassName(index, group) == 'bottom') {
+        } else if (this.getClassName(index, group) === 'bottom') {
             return <BottomColorBlock />
-        } else if ((this.getClassName(index, group) == 'right') && (group == 'green')) {
+        } else if ((this.getClassName(index, group) === 'right') && (group === 'green')) {
             return <RightColorBlock color/>
-        } else if (this.getClassName(index, group) == 'right') {
+        } else if (this.getClassName(index, group) === 'right') {
             return <RightColorBlock />
-        } else if ((this.getClassName(index, group) == 'left') && (group == 'pink')) {
+        } else if ((this.getClassName(index, group) === 'left') && (group === 'pink')) {
             return <LeftColorBlock color/>
         } 
-        else if (this.getClassName(index, group) == 'left') {
+        else if (this.getClassName(index, group) === 'left') {
             return <LeftColorBlock />
         }
     }
@@ -83,7 +83,7 @@ class Square extends Component {
                     <p><strong>{ title }</strong></p>
                     <div className='player-position'>
                         { this.props.gameState.players.map(player => {
-                            if (player.position == position) {
+                            if (player.position === position) {
                                 return <Player key={ player.id } playerID={ player.id }/>
                             }
                         }) }

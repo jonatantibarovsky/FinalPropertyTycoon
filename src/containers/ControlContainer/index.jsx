@@ -20,7 +20,11 @@ class ControlContainer extends Component {
         return(
             <div>
                 <button onClick={ () => this.endTurnHandleCLick() }>END TURN</button>
-                <Dice />
+                <Dice 
+                    properties={ this.props.properties }
+                    potlucks={ this.props.potlucks }
+                    opportunityKnocks={ this.props.opportunityKnocks }
+                />
                 <Auction properties={ this.props.properties }/>
                 <Buy properties={ this.props.properties }/>
             </div>

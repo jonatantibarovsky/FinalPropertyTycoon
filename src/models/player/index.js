@@ -8,6 +8,13 @@ class Player {
         this.jailroll = 0
         this.properties = []
         this.firstRoundComplete = false
+        this.potluckJailCard = false
+        this.opportunityJailCard = false
+    }
+
+    // adjusts player's position to a specific position
+    adjustPosition = (position) => {
+        this.position = position
     }
 
     updatePosition = (value) => {
@@ -24,6 +31,10 @@ class Player {
             }
             this.position = (this.position + value) % 40
         }
+    }
+
+    getMoney = (money) => {
+        this.money += money
     }
 
     pay = (value) => {

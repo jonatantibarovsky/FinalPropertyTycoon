@@ -15,7 +15,7 @@ const potluck12 = new Card('Savings bond matures, collect £100', 100)
 const potluck13 = new Card('Go to jail. Do not pass Go, do not collect £200', 0)
 const potluck14 = new Card('Received interest on shares of £25', 25)
 const potluck15 = new Card("It's your birthday. Collect £10 from each player", 10)
-const potluck16 = new Card('Get out of jail free')
+const potluck16 = new Card('Get out of jail free / Potluck')
 
 const potlucks = [potluck1, potluck2, potluck3, potluck4, potluck5, potluck6, potluck7,
                     potluck8, potluck9, potluck10, potluck11, potluck12, potluck13, potluck14,

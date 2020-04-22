@@ -17,6 +17,27 @@ class Dice extends Component {
         }
     }
 
+    checkSquare = (square) => {
+        const currentPlayerID = this.props.gameState.currentPlayer
+        let card
+        if (square.group === 'bonus' && square.name === 'Pot Luck') {
+            card = this.props.potlucks.potlucks[2]
+            card.adjustPosition(currentPlayerID)
+        } else if (square.group === 'bonus' && square.name === 'Opportunity Knocks') {
+            console.log(square)
+        } else if (square.group === 'tax' && square.name === 'Income Tax') {
+            console.log(square)
+        } else if (square.group === 'tax' && square.name === 'Super Tax') {
+            console.log(square)
+        } else if (square.group === 'utility' && square.name === 'Tesla Power Co') {
+            console.log(square)
+        } else if (square.group === 'utility' && square.name === 'Edison Water') {
+            console.log(square)
+        } else {
+            console.log(square)
+        }
+    }
+
     handleClick() {
         if (!this.props.gameState.rolled) {
             let diceOne = Math.floor(Math.random() * 6) + 1
@@ -28,7 +49,20 @@ class Dice extends Component {
             })
             let value = diceOne + diceTwo
             this.props.updatePlayerPosition(this.props.gameState.currentPlayer, value)
-            this.props.showBuyModal()
+            const currentPlayerID = this.props.gameState.currentPlayer
+            const currentPlayer = this.props.gameState.players[currentPlayerID - 1]
+            const currentProperty = this.props.properties.properties[currentPlayer.position]
+            this.checkSquare(currentProperty)
+            // check square here
+            // do things according to square
+            // pay rent, get cad
+            if (/* special square*/ false) {
+
+            } else {
+                // property square
+                this.props.showBuyModal()
+            }
+            
             this.props.setRolledTrue()
         } else {
             alert('You already rolled!')

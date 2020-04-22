@@ -53,6 +53,8 @@ class Board extends Component {
                     <div>
                         <ControlContainer 
                             properties={ this.props.properties }
+                            potlucks={ this.props.potlucks }
+                            opportunityKnocks={ this.props.opportunityKnocks }
                         />
                     </div>
                     <div className='right-row'>

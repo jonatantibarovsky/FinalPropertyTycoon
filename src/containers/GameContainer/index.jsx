@@ -13,6 +13,8 @@ class GameContainer extends Component {
                 <Board 
                     properties={ this.props.properties }
                     setMoveValue={ this.setMoveValue }
+                    potlucks={ this.props.potlucks }
+                    opportunityKnocks={ this.props.opportunityKnocks }
                 />
             </div>
         )

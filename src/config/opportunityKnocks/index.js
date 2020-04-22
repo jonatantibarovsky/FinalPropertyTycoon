@@ -15,7 +15,7 @@ const opportunity12 = new Card('Go back 3 spaces', 0)
 const opportunity13 = new Card('Advance to Skywalker Drive. If you pass GO collect £200', 0)
 const opportunity14 = new Card('Go to jail. Do not pass GO, do not collect £200', 0)
 const opportunity15 = new Card('Drunk in charge of skateboard. Fine £20', 20)
-const opportunity16 = new Card('Get out of jail free', 0)
+const opportunity16 = new Card('Get out of jail free / Opportunity', 0)
 
 const opportunityKnocks = [opportunity1, opportunity2, opportunity3, opportunity4, opportunity5, opportunity6,
                             opportunity7, opportunity8, opportunity9, opportunity10, opportunity11, opportunity12,

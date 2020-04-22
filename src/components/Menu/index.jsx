@@ -12,7 +12,6 @@ class StartMenu extends Component {
     }
     
     render() {
-        console.log(this.props)
         return(
             <div className='App'>
                 <div className="MainBox">
