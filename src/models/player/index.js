@@ -46,6 +46,48 @@ class Player {
         this.jail = true
         this.jailroll = 0
     }
+
+    checkCompleteGroupOwned = (property) => {
+        const groupToCheck = property.group
+        if (this.properties) {
+            let groupPropertiesOwned = this.properties.filter(property => {
+                return property.group === groupToCheck
+            })
+
+            if ((groupToCheck === 'brown' || groupToCheck === 'dark_blue') && groupPropertiesOwned.length === 2) {
+                console.log(groupPropertiesOwned)
+                return {
+                    check: true,
+                    group: groupPropertiesOwned
+                }
+            } else if (groupPropertiesOwned.length === 3) {
+                console.log(groupPropertiesOwned)
+                return {
+                    check: true,
+                    group: groupPropertiesOwned
+                }
+            } else {
+                return {
+                    check: false,
+                    group: groupPropertiesOwned
+                }
+            }
+        }
+    }
+
+    developProperty = (property) => {
+        let ownership = this.checkCompleteGroupOwned(property)
+
+        if (!ownership.check) {
+            alert('You must own all properties in a group before building houses.')
+        } else if (this.money < property.housePrice) {
+            alert('Not enough money to develop this property')
+        } else if (property.rentIndex === 6) {
+            alert("Can't develop this property any further")
+        } else {
+            console.log('developProperty function')
+        }
+    }
 }
 
 export { Player }

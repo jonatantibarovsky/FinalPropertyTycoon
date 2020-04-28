@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
 import { Modal } from 'react-bootstrap'
 
 import { hideBuyModal, pay, 
-        showAuctionModal, setAuctionPlayers} from '../../redux/actions/game'
+        showAuctionModal, setAuctionPlayers,
+        addLog} from '../../redux/actions/game'
 
 class Buy extends Component {
     constructor(props) {
@@ -34,6 +36,7 @@ class Buy extends Component {
             currentProperty.owner = currentPlayer
             currentPlayer.properties.push(currentProperty)
             this.props.pay(currentPlayerID, currentProperty.value)
+            this.props.addLog(`Player ${currentPlayerID} has bought ${currentProperty.name} for £${currentProperty.value}`)
         }
     }
 
@@ -75,7 +78,8 @@ const mapDispatchToProps = {
     hideBuyModal,
     pay,
     showAuctionModal,
-    setAuctionPlayers
+    setAuctionPlayers,
+    addLog
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buy)

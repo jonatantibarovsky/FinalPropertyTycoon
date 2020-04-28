@@ -19,6 +19,22 @@ export const ADD_POTLUCK_JAILCARD = 'ADD_POTLUCK_JAILCARD'
 export const ADD_OPPORTUNITY_JAILCARD = 'ADD_OPPORTUNITY_JAILCARD'
 export const REMOVE_POTLUCK_JAILCARD = 'REMOVE_POTLUCK_JAILCARD'
 export const REMOVE_OPPORTUNITY_JAILCARD = 'REMOVE_OPPORTUNITY_JAILCARD'
+export const ADD_LOG = 'ADD_LOG'
+export const GO_TO_JAIL = 'GO_TO_JAIL'
+
+export const goToJail = (player) => {
+	return {
+		type: GO_TO_JAIL,
+		player: player
+	}
+}
+
+export const addLog = (message) => {
+	return {
+		type: ADD_LOG,
+		message: message
+	}
+}
 
 export const changeCurrentPlayer = () => {
     return {

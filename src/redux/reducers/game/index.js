@@ -8,7 +8,7 @@ import { CHANGE_CURRENT_PLAYER, SET_DICE,
 		ADJUST_PLAYER_POSITION, GET_MONEY,
 		ADD_TO_FREE_PARKING, ADD_POTLUCK_JAILCARD,
 		REMOVE_POTLUCK_JAILCARD, ADD_OPPORTUNITY_JAILCARD,
-		REMOVE_OPPORTUNITY_JAILCARD } from '../../actions/game'
+		REMOVE_OPPORTUNITY_JAILCARD, ADD_LOG, GO_TO_JAIL } from '../../actions/game'
 
 import { Player } from '../../../models/player'
 
@@ -21,7 +21,8 @@ const initialState = {
 	showAuctionModal: false,
 	rolled: false,
 	playersInAuction: [],
-	freeParking: 0
+	freeParking: 0,
+	gameLog: [`Player 1's turn`]
 }
 
 const changePlayerNumber = (players, number) => {
@@ -39,6 +40,11 @@ const changePlayerNumber = (players, number) => {
 
 export default (state = initialState, action) => {
 	switch (action.type) {
+		case ADD_LOG:
+			state.gameLog.unshift(action.message)
+			return {
+				...state
+			}
 		case CHANGE_PLAYERS_NUMBER:
 			let newPlayers = changePlayerNumber(state.players, action.number)
 			return {
@@ -185,6 +191,21 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				players: opportunityJailPlayers
+			}
+		case GO_TO_JAIL:
+			let jailedPlayers = state.players.map(player => {
+				if (player.id === action.player.id) {
+					player.position = 10
+					player.jail = true
+					player.jailroll = 0
+					console.log('player in jail')
+					console.log(player)
+				}
+				return player
+			})
+			return {
+				...state,
+				players: jailedPlayers
 			}
 		default:
 			return state

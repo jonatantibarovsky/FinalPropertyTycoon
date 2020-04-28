@@ -8,24 +8,24 @@ import "../styles/board.scss"
 
 const RightColorBlock = styled.section`
     height: 60px;
-    min-width: 10px;
+    min-width: 15px;
     background: ${props => props.color ? "#008000" : "#0000FF"};
     border-right: 1px solid black;
 `
 const LeftColorBlock = styled.section`
     height: 60px;
-    width: 10px;
+    width: 15px;
     background: ${props => props.color ? "#FF69B4" : "#FFA500"};
     border-left: 1px solid black;
 `
 const TopColorBlock = styled.section`
-    height: 10px;
+    height: 15px;
     width: 60px;
     background: ${props => props.color ?  "#FF0000" : "#FFFF00"};
     border-top: 1px solid black;
 `
 const BottomColorBlock = styled.section`
-    height: 10px;
+    height: 15px;
     width: 59px;
     background: ${props => props.color ? "#8B4513" : "#87CEEB"};
     border-bottom: 1px solid black;

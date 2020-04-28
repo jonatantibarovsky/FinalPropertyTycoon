@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 
-import { changeCurrentPlayer, setRolledFalse } from '../../redux/actions/game'
+import { changeCurrentPlayer, setRolledFalse,
+        addLog } from '../../redux/actions/game'
 import { connect } from 'react-redux'
 import Dice from '../../components/Dice'
 import Buy from '../../components/Buy'
 import Auction from '../../components/Auction'
+import GameLog from '../../components/GameLog'
+import CurrentPlayer from '../../components/CurrentPlayer'
 
 class ControlContainer extends Component {
     constructor(props) {
@@ -13,13 +16,18 @@ class ControlContainer extends Component {
 
     endTurnHandleCLick = () => {
         this.props.changeCurrentPlayer()
+        if (this.props.gameState.currentPlayer === 4) {
+            this.props.addLog(`Player 1's turn`)
+        } else {
+            this.props.addLog(`Player ${ this.props.gameState.currentPlayer + 1 }'s turn`)
+        }
         this.props.setRolledFalse()
     }
 
     render() {
         return(
             <div>
-                <button onClick={ () => this.endTurnHandleCLick() }>END TURN</button>
+                <CurrentPlayer />
                 <Dice 
                     properties={ this.props.properties }
                     potlucks={ this.props.potlucks }
@@ -27,6 +35,8 @@ class ControlContainer extends Component {
                 />
                 <Auction properties={ this.props.properties }/>
                 <Buy properties={ this.props.properties }/>
+                <GameLog />
+                <button onClick={ () => this.endTurnHandleCLick() }>END TURN</button>
             </div>
         )
     }
@@ -40,7 +50,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     changeCurrentPlayer,
-    setRolledFalse
+    setRolledFalse,
+    addLog
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ControlContainer)

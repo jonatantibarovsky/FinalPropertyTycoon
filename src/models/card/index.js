@@ -3,7 +3,8 @@ import store from '../../redux/index'
 
 import { adjustPlayerPosition, getMoney,
         pay, addToFreeParking,
-        addOpportunityJailcard, addPotluckJailcard } from '../../redux/actions/game'
+        addOpportunityJailcard, addPotluckJailcard,
+        goToJail } from '../../redux/actions/game'
 
 class Card {
     constructor(text, method) {
@@ -76,20 +77,48 @@ class Card {
         }
     }
 
-    checkMethod = (card, player) => {
+    goToJail = (player) => {
+        console.log('go to jail from card class')
+        store.dispatch(goToJail(player))
+    }
+
+    advanceIfPassGo = (player) => {
+        if (this.text === 'Advance to Han Xin Gardens. If you pass GO, collect £200') {
+            if (this.player.position < 25) {
+                store.dispatch(getMoney(player, 200))
+            }
+            store.dispatch(adjustPlayerPosition(player, 24))
+        } else if (this.text === 'Take a trip to Hove Station. If you pass GO, collect £200') {
+            if (this.player.position < 6) {
+                store.dispatch(getMoney(player, 200))
+            }
+            store.dispatch(adjustPlayerPosition(player, 6))
+        } else if (this.text === 'Advance to Skywalker Drive. If you pass GO collect £200') {
+            if (this.player.position < 12) {
+                store.dispatch(getMoney(player, 200))
+            }
+            store.dispatch(adjustPlayerPosition(player, 11))
+        }
+    }
+
+    checkMethod = (card, playerID, player) => {
         switch (card.method) {
             case 1:
-                this.adjustPosition(player)
+                this.adjustPosition(playerID)
                 break
             case 2:
-                this.pay(player)
+                this.pay(playerID)
                 break
             case 3:
-                this.increaseMoney(player)
+                this.increaseMoney(playerID)
                 break
             case 4:
-                this.addJailCard(player)
+                this.addJailCard(playerID)
                 break
+            case 5:
+                this.goToJail(playerID)
+            case 6:
+                this.advanceIfPassGo(player)
             default:
                 break
         }
