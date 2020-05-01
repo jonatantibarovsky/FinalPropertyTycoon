@@ -8,7 +8,8 @@ import { CHANGE_CURRENT_PLAYER, SET_DICE,
 		ADJUST_PLAYER_POSITION, GET_MONEY,
 		ADD_TO_FREE_PARKING, ADD_POTLUCK_JAILCARD,
 		REMOVE_POTLUCK_JAILCARD, ADD_OPPORTUNITY_JAILCARD,
-		REMOVE_OPPORTUNITY_JAILCARD, ADD_LOG, GO_TO_JAIL } from '../../actions/game'
+		REMOVE_OPPORTUNITY_JAILCARD, ADD_LOG, GO_TO_JAIL,
+		BUY_HOUSE, RESET_AUCTION } from '../../actions/game'
 
 import { Player } from '../../../models/player'
 
@@ -40,6 +41,22 @@ const changePlayerNumber = (players, number) => {
 
 export default (state = initialState, action) => {
 	switch (action.type) {
+		case RESET_AUCTION:
+			return {
+				...state,
+				playersInAuction: []
+			}
+		case BUY_HOUSE:
+			let playerBoughtHouse = state.players.map(player => {
+				if (player.id === action.player) {
+					player.developProperty(action.property)
+				}
+				return player
+			})
+			return {
+				...state,
+				players: playerBoughtHouse
+			}
 		case ADD_LOG:
 			state.gameLog.unshift(action.message)
 			return {
@@ -171,6 +188,7 @@ export default (state = initialState, action) => {
 				freeParking: action.value
 			}
 		case ADD_POTLUCK_JAILCARD:
+			console.log('ADD_POTLUCK_JAILCARD')
 			let potluckJailPlayers = state.players.map(player => {
 				if (player.id === action.player.id) {
 					player.potluckJailCard = true
@@ -182,6 +200,7 @@ export default (state = initialState, action) => {
 				players: potluckJailPlayers
 			}
 		case ADD_OPPORTUNITY_JAILCARD:
+			console.log('ADD_OPPORTUNITY_JAILCARD')
 			let opportunityJailPlayers = state.players.map(player => {
 				if (player.id === action.player.id) {
 					player.opportunityJailCard = true
@@ -193,6 +212,7 @@ export default (state = initialState, action) => {
 				players: opportunityJailPlayers
 			}
 		case GO_TO_JAIL:
+			console.log('gotojail')
 			let jailedPlayers = state.players.map(player => {
 				if (player.id === action.player.id) {
 					player.position = 10

@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { Modal } from 'react-bootstrap'
 
+import PropertyFeatures from '../PropertyFeatures'
+
+import { buyHouse, pay } from '../../redux/actions/game'
+import { connect } from 'react-redux'
+
 class PlayerStats extends Component {
     constructor(props) {
         super(props)
@@ -23,13 +28,19 @@ class PlayerStats extends Component {
         })
     }
 
+    buyhouse = (owner, property) => {
+        this.props.buyHouse(owner, property)
+        this.props.pay(owner, property.housePrice)
+
+    }
+
 
     render() {
-        let properties = this.props.properties.map(property => <div>{ property.name }</div>)
+        let properties = this.props.properties.map(property => <PropertyFeatures property={ property } />)
         return(
             <div>
                 <div>
-                    { this.props.player }
+                    { this.props.player.name }
                     <div>
                         { this.props.playerMoney }
                     </div>
@@ -50,4 +61,9 @@ class PlayerStats extends Component {
     }
 }
 
-export default PlayerStats
+const mapDispatchToProps = {
+    buyHouse,
+    pay
+}
+
+export default connect(null, mapDispatchToProps)(PlayerStats)

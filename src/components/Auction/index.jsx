@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { removeAuctionPlayer, pay, hideAuctionModal } from '../../redux/actions/game'
+import { removeAuctionPlayer, pay,
+        hideAuctionModal, addLog,
+        resetAuction } from '../../redux/actions/game'
 
 class Auction extends Component {
     constructor(props) {
@@ -31,6 +33,7 @@ class Auction extends Component {
                     highestBidder: this.props.gameState.playersInAuction[currentBidder],
                     currentBidder: (currentBidder + 1)  % this.props.gameState.playersInAuction.length
                 })
+                console.log(this.state.currentBidder)
             } else {
                 alert('Bid needs to be greater than current highest bid.')
             }
@@ -48,15 +51,26 @@ class Auction extends Component {
         if (this.props.gameState.playersInAuction.length < 2 && this.state.highestBid === 0) {
             this.props.hideAuctionModal()
             alert('No bids.')
-        } else if (this.props.gameState.playersInAuction.length < 2) {
+        } else if (this.props.gameState.playersInAuction.length < 3) {
             this.props.hideAuctionModal()
-            const winner = this.props.gameState.playersInAuction[0]
+            // TODO: winner is always the first one in the array
+            const winner = this.state.highestBidder
+            console.log(winner)
             currentProperty.owner = winner
             winner.properties.push(currentProperty)
-            this.props.pay(winner.id, currentProperty.value)
+            this.setState({
+                highestBidder: null,
+                highestBid: 0,
+                currentBidder: 0,
+                currentBid: ''
+            })
+            this.props.resetAuction()
+            this.props.pay(winner.id, this.state.highestBid)
+            this.props.addLog(`${winner.name} has won the auction and paid £${this.state.highestBid} for ${currentProperty.name}`)
         } else {
             const { currentBidder } = this.state
             this.props.removeAuctionPlayer(this.props.gameState.playersInAuction[currentBidder].id)
+            this.props.addLog(`${currentPlayer.name} has passed`)
         }
     }
 
@@ -92,7 +106,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     removeAuctionPlayer: removeAuctionPlayer,
     pay: pay,
-    hideAuctionModal, hideAuctionModal
+    hideAuctionModal: hideAuctionModal,
+    addLog: addLog,
+    resetAuction: resetAuction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auction)

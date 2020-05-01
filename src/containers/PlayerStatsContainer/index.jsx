@@ -13,7 +13,7 @@ class PlayerStatsContainer extends Component {
         let playerStats = this.props.game.players.map((player) => 
             <PlayerStats 
                 key={ player.id } 
-                player={ player.name } 
+                player={ player } 
                 playerMoney={ player.money } 
                 properties={ player.properties }
                 id={ player.id }

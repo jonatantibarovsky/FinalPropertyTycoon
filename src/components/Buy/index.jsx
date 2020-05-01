@@ -35,15 +35,42 @@ class Buy extends Component {
         } else {
             currentProperty.owner = currentPlayer
             currentPlayer.properties.push(currentProperty)
+            const check = currentPlayer.checkCompleteGroupOwned(currentProperty)
+
+            // handles station rents
+            if (currentProperty.group === 'station') {
+                let stations = check.group
+                stations.forEach(station => {
+                    station.rentIndex = stations.length - 1
+                })
+            } else if (currentProperty.group === 'utility') {
+                let utilities = currentPlayer.countPropertiesInGroup(currentProperty)
+                let utilityProperties = check.group
+                utilityProperties.forEach(utility => {
+                    utility.rentIndex = utilities
+                })
+            }
+
+            if (check.check === true) {
+                check.group.map(property => {
+                    if (property.housePrice !== null) {
+                        property.rentIndex = 1
+                    }
+                })
+            }
             this.props.pay(currentPlayerID, currentProperty.value)
             this.props.addLog(`Player ${currentPlayerID} has bought ${currentProperty.name} for £${currentProperty.value}`)
         }
     }
 
     showAuction = () => {
+        const currentPlayerID = this.props.gameState.currentPlayer
+        const currentPlayer = this.props.gameState.players[currentPlayerID - 1]
+        const currentProperty = this.props.properties.properties[currentPlayer.position]
         this.props.showAuctionModal()
         this.props.setAuctionPlayers()
         this.props.hideBuyModal()
+        this.props.addLog(`${currentProperty.name} is on auction`)
     }
 
 

@@ -47,6 +47,17 @@ class Player {
         this.jailroll = 0
     }
 
+    countPropertiesInGroup = (property) => {
+        let group = property.group
+        let owned
+        if (this.properties) {
+            owned = this.properties.filter(property => {
+                return property.group === group
+            })
+        }
+        return owned.length
+    }
+
     checkCompleteGroupOwned = (property) => {
         const groupToCheck = property.group
         if (this.properties) {
@@ -77,15 +88,23 @@ class Player {
 
     developProperty = (property) => {
         let ownership = this.checkCompleteGroupOwned(property)
+        console.log(ownership)
 
         if (!ownership.check) {
             alert('You must own all properties in a group before building houses.')
         } else if (this.money < property.housePrice) {
             alert('Not enough money to develop this property')
-        } else if (property.rentIndex === 6) {
+        } else if (property.rentIndex === 7) {
             alert("Can't develop this property any further")
         } else {
-            console.log('developProperty function')
+            // list of rent indices
+            let rentIndices = ownership.group.map(property => {
+                return property.rentIndex
+            })
+            const areDeveloped = rentIndices.every(index => index === rentIndices[0])
+            console.log(areDeveloped)
+
+            
         }
     }
 }

@@ -10,6 +10,7 @@ class Card {
     constructor(text, method) {
         this.text = text
         this.method = method
+
     }
 
     adjustPosition = (player) => {
@@ -84,20 +85,20 @@ class Card {
 
     advanceIfPassGo = (player) => {
         if (this.text === 'Advance to Han Xin Gardens. If you pass GO, collect £200') {
-            if (this.player.position < 25) {
-                store.dispatch(getMoney(player, 200))
+            if (player.position < 25) {
+                store.dispatch(getMoney(player.id, 200))
             }
-            store.dispatch(adjustPlayerPosition(player, 24))
+            store.dispatch(adjustPlayerPosition(player.id, 24))
         } else if (this.text === 'Take a trip to Hove Station. If you pass GO, collect £200') {
-            if (this.player.position < 6) {
-                store.dispatch(getMoney(player, 200))
+            if (player.position < 6) {
+                store.dispatch(getMoney(player.id, 200))
             }
-            store.dispatch(adjustPlayerPosition(player, 6))
+            store.dispatch(adjustPlayerPosition(player.id, 5))
         } else if (this.text === 'Advance to Skywalker Drive. If you pass GO collect £200') {
-            if (this.player.position < 12) {
-                store.dispatch(getMoney(player, 200))
+            if (player.position < 12) {
+                store.dispatch(getMoney(player.id, 200))
             }
-            store.dispatch(adjustPlayerPosition(player, 11))
+            store.dispatch(adjustPlayerPosition(player.id, 11))
         }
     }
 

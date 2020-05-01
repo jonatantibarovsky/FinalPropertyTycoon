@@ -21,6 +21,22 @@ export const REMOVE_POTLUCK_JAILCARD = 'REMOVE_POTLUCK_JAILCARD'
 export const REMOVE_OPPORTUNITY_JAILCARD = 'REMOVE_OPPORTUNITY_JAILCARD'
 export const ADD_LOG = 'ADD_LOG'
 export const GO_TO_JAIL = 'GO_TO_JAIL'
+export const BUY_HOUSE = 'BUY_HOUSE'
+export const RESET_AUCTION = 'RESET_AUCTION'
+
+export const resetAuction = () => {
+	return {
+		type: RESET_AUCTION
+	}
+}
+
+export const buyHouse = (player, property) => {
+	return {
+		type: BUY_HOUSE,
+		player: player,
+		property: property
+	}
+}
 
 export const goToJail = (player) => {
 	return {
