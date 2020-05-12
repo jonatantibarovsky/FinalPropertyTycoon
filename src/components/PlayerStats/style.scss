@@ -1,33 +1,36 @@
-.control-board {
-    max-width: 300px;
-}
-
-.control-buttons {
+.stats-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly
-    
+    justify-content: space-evenly;
+    margin-bottom: 15px;
 }
 
-.end {
+.player-property-button {
     background-color: white;
     color: black;
     border: 2px solid black;
     width: 100px;
-    height: 10%;
-    font-size: 200%;
+    height: 35px;
+    font-size: 100%;
     border-radius: 12px;
     box-shadow: 0 9px #999;
     cursor: pointer;
     outline: none;
 }
 
-.end:hover {
+.player-property-button:hover {
     background-color: black;
     color: white;
 }
   
-.end:active{
+.player-property-button:active{
     box-shadow: 0 5px #666;
     transform: translateY(4px);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: space-evenly;
 }

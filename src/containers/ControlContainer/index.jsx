@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import './style.scss'
+
 import { changeCurrentPlayer, setRolledFalse,
         addLog } from '../../redux/actions/game'
 import { connect } from 'react-redux'
@@ -16,7 +18,7 @@ class ControlContainer extends Component {
 
     endTurnHandleCLick = () => {
         this.props.changeCurrentPlayer()
-        if (this.props.gameState.currentPlayer === 4) {
+        if (this.props.gameState.currentPlayer === 6) {
             this.props.addLog(`Player 1's turn`)
         } else {
             this.props.addLog(`Player ${ this.props.gameState.currentPlayer + 1 }'s turn`)
@@ -26,17 +28,19 @@ class ControlContainer extends Component {
 
     render() {
         return(
-            <div>
-                <CurrentPlayer />
-                <Dice 
-                    properties={ this.props.properties }
-                    potlucks={ this.props.potlucks }
-                    opportunityKnocks={ this.props.opportunityKnocks }
-                />
+            <div className='control-board'>
                 <Auction properties={ this.props.properties }/>
                 <Buy properties={ this.props.properties }/>
                 <GameLog />
-                <button onClick={ () => this.endTurnHandleCLick() }>END TURN</button>
+                <CurrentPlayer />
+                <div className='control-buttons'>
+                    <button className='end' onClick={ () => this.endTurnHandleCLick() }>END TURN</button>
+                    <Dice 
+                        properties={ this.props.properties }
+                        potlucks={ this.props.potlucks }
+                        opportunityKnocks={ this.props.opportunityKnocks }
+                    />
+                </div>
             </div>
         )
     }

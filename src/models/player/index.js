@@ -10,6 +10,7 @@ class Player {
         this.firstRoundComplete = false
         this.potluckJailCard = false
         this.opportunityJailCard = false
+        this.icon = null
     }
 
     // adjusts player's position to a specific position
@@ -66,13 +67,11 @@ class Player {
             })
 
             if ((groupToCheck === 'brown' || groupToCheck === 'dark_blue') && groupPropertiesOwned.length === 2) {
-                console.log(groupPropertiesOwned)
                 return {
                     check: true,
                     group: groupPropertiesOwned
                 }
             } else if (groupPropertiesOwned.length === 3) {
-                console.log(groupPropertiesOwned)
                 return {
                     check: true,
                     group: groupPropertiesOwned
@@ -88,7 +87,7 @@ class Player {
 
     developProperty = (property) => {
         let ownership = this.checkCompleteGroupOwned(property)
-        console.log(ownership)
+        (ownership)
 
         if (!ownership.check) {
             alert('You must own all properties in a group before building houses.')
@@ -102,7 +101,7 @@ class Player {
                 return property.rentIndex
             })
             const areDeveloped = rentIndices.every(index => index === rentIndices[0])
-            console.log(areDeveloped)
+            (areDeveloped)
 
             
         }

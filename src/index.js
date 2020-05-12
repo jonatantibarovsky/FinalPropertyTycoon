@@ -4,13 +4,15 @@ import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import store from './redux'
 
+import './style.scss'
+
 // component imports
-import GameRoutes from './containers/GameRoutes'
+import AppContainer from './containers/AppContainer'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={ store }>
-      <GameRoutes />
+      <AppContainer />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

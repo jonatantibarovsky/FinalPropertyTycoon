@@ -1,9 +1,32 @@
+.dice-button {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    width: 100px;
+    height: 60px;
+    font-size: 200%;
+    border-radius: 12px;
+    box-shadow: 0 9px #999;
+    cursor: pointer;
+    outline: none;
+    margin: 0 0;
+}
+
+.dice-button:hover {
+    background-color: black;
+    color: white;
+}
+  
+.dice-button:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
 .dice-container {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: row;
-    min-height: 80px;
 }
 
 .dice-values {
@@ -13,28 +36,4 @@
     justify-content: space-evenly;
     align-items: center;
     font-size: 25px;
-}
-
-.dice-button {
-
-    color: black;
-    border: 2px solid black;
-    width: 70px;
-    height: 60px;
-    font-size: 14px;
-    border-radius: 12px;
-    box-shadow: 0 9px #999;
-    cursor: pointer;
-    outline: none;
-    margin-bottom: 10px;
-}
-  
-.dice-button:hover {
-    background-color: black;
-    color: white;
-}
-  
-.dice-button:active {
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
 }

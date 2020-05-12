@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import { setDice, updatePlayerPosition,
         showBuyModal, setRolledTrue,
         addLog, goToJail,
-        pay, getMoney } from '../../redux/actions/game'
+        pay, getMoney,
+        getFreeParkingMoney } from '../../redux/actions/game'
 import { connect } from 'react-redux'
 
 import './style.scss'
@@ -13,9 +14,21 @@ class Dice extends Component {
         super(props)
 
         this.state = {
-            diceOne: 0,
-            diceTwo: 0,
+            diceOne: null,
+            diceTwo: null,
             double: false,
+            doubleCount: 0,
+            rolledDouble: false
+        }
+
+        this.double = false
+    }
+
+    enoughMoney = (player, money) => {
+        if (player.money < money) {
+            return false
+        } else {
+            return true
         }
     }
 
@@ -44,7 +57,7 @@ class Dice extends Component {
             this.props.pay(currentPlayerID, 100)
 
         } else if (square.group === 'utility') {
-            if (square.owner) {
+            if (square.owner !== null) {
                 const { diceOne, diceTwo } = this.state
                 let rent
                 if (square.rentIndex === 1) {
@@ -54,7 +67,7 @@ class Dice extends Component {
                 }
                 this.props.getMoney(square.owner.id, rent)
                 this.props.pay(currentPlayerID, rent)
-                this.props.addLog(`${currentPlayer.name} paid £${rent} to ${this.props.gameState.players[square.owner.id - 1].name} as rent`)
+                this.props.addLog(`${currentPlayer.name} paid £${rent} to ${square.owner} as rent`)
             }
 
         } else if (square.name === 'Go To Jail') {
@@ -68,38 +81,53 @@ class Dice extends Component {
                 this.props.addLog(`${currentPlayer.name} paid £${rent} to ${this.props.gameState.players[square.owner.id - 1].name} as rent`)
             }  
 
-        } else if (square.owner !== null) {
+        } else if (square.owner !== null && square.mortgaged === false) {
             const rent = square.rents[square.rentIndex]
             this.props.pay(currentPlayerID, rent)
             this.props.getMoney(square.owner.id, rent)
             this.props.addLog(`${currentPlayer.name} paid £${rent} to ${this.props.gameState.players[square.owner.id - 1].name} as rent`)
+        } else if (square.name === 'Free Parking') {
+            this.props.getFreeParkingMoney(currentPlayerID)
+            this.props.addLog(`${currentPlayer.name} got £${this.props.gameState.freeParking} from free parking`)
         }
     }
 
-    handleClick() {
+    async handleClick() {
         if (!this.props.gameState.rolled) {
             let diceOne = Math.floor(Math.random() * 6) + 1
             let diceTwo = Math.floor(Math.random() * 6) + 1
             this.props.setDice([diceOne, diceTwo])
             this.props.addLog(`You rolled ${ diceOne } and ${ diceTwo }`)
-            this.setState({
+            await this.setState({
                 diceOne: diceOne,
                 diceTwo: diceTwo
-            }, () => {
-                console.log(this.state.diceOne)
-                console.log(this.state.diceTwo)
-                if (this.state.diceOne === this.state.diceTwo) {
-                    this.setState({
-                        double: true
-                }, () => {
-                    if (this.state.double === true) {
-                        console.log('setrollfalse')
-                    } else {
-                        this.props.setRolledTrue()
-                    }
-                })                    
-                }
             })
+            if (this.state.diceOne === this.state.diceTwo) {
+                alert('You rolled a double, you have another turn. Just roll the dice after you are done with your current turn. Do NOT press end turn.')
+                await this.setState({
+                    double: true,
+                    doubleCount: this.state.doubleCount + 1
+                })
+            }
+
+            if (this.state.double === true && this.state.rolledDouble === true) {
+                this.props.setRolledTrue()
+                this.setState({
+                    double: false,
+                    doubleCount: 0,
+                    rolledDouble: false
+                })
+            } else if (this.state.doubleCount === 2) {
+                console.log('jail')
+            }
+
+            if (this.state.double === true) {
+                this.setState({
+                    rolledDouble: true
+                })
+            } else {
+                this.props.setRolledTrue()
+            }
           
             let value = diceOne + diceTwo
             this.props.updatePlayerPosition(this.props.gameState.currentPlayer, value)
@@ -113,8 +141,7 @@ class Dice extends Component {
             // tax properties handles here
             // utilities are handled here
             this.checkSquare(currentProperty, currentPlayerID)
-            
-            // if player throws doubles twice in a row --> go to jail
+
             if (false ) {
 
             } else {
@@ -153,7 +180,8 @@ const mapDispatchToProps = {
     addLog,
     goToJail,
     pay,
-    getMoney
+    getMoney,
+    getFreeParkingMoney
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dice)

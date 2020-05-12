@@ -79,7 +79,7 @@ class Card {
     }
 
     goToJail = (player) => {
-        console.log('go to jail from card class')
+        ('go to jail from card class')
         store.dispatch(goToJail(player))
     }
 

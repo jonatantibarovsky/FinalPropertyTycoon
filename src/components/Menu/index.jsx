@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { changePlayersCount } from '../../redux/actions/game'
+import { changePlayersCount, changeSetupIndex } from '../../redux/actions/game'
 import './style.css'
 
 import MainImage from './startmenu.png'
@@ -10,23 +9,29 @@ class StartMenu extends Component {
     constructor(props) {
         super(props)
     }
-    
+
     render() {
         return(
             <div className='App'>
                 <div className="MainBox">
                     <div className="HeaderBox">
+                        
                         <img className="imageClass" src={ MainImage } alt="main"></img>
                         <div className="headerCentered">Property Tycoon</div>
                     </div>
-                    <Link 
+                    <button 
                         to='/game' 
-                        onClick={ () => this.props.changePlayersCount(4) }
+                        onClick={ () => this.props.changeSetupIndex(5) }
                         className="button1"
                     >
                         PLAY
-                    </Link>
-                    <button className="button2">HOW TO PLAY</button>
+                    </button>
+                    <button 
+                        className="button2"
+                        onClick={() => this.props.changeSetupIndex(2)}
+                    >
+                        HOW TO PLAY
+                    </button>
                     <h4>By Watson Games</h4>
                 </div>
             </div>
@@ -34,8 +39,15 @@ class StartMenu extends Component {
     }
 }
 
-const mapDispatchToProps = {
-    changePlayersCount
+const mapStateToProps = (state) => {
+    return {
+        game: state.game
+    }
 }
 
-export default connect(null, mapDispatchToProps)(StartMenu)
+const mapDispatchToProps = {
+    changePlayersCount,
+    changeSetupIndex
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StartMenu)

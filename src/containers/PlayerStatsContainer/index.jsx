@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import { changeSetupIndex } from '../../redux/actions/game'
+
+import './style.scss'
+
 // component imports
 import PlayerStats from '../../components/PlayerStats'
+import Timer from '../../components/Timer'
 
 class PlayerStatsContainer extends Component {
     constructor(props) {
@@ -21,8 +26,12 @@ class PlayerStatsContainer extends Component {
         )
 
         return(
-            <div>
-                { playerStats }
+            <div className='play-stats-cont'>
+                <div className='playerStats'>
+                    { playerStats }
+                </div>
+                <Timer />
+                <button className='exit-button' onClick={() => this.props.changeSetupIndex(1)}>exit game</button>
             </div>
         )
     }
@@ -34,4 +43,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(PlayerStatsContainer)
+const mapDispatchToProps = {
+    changeSetupIndex
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerStatsContainer)

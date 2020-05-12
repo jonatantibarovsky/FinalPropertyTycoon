@@ -23,6 +23,53 @@ export const ADD_LOG = 'ADD_LOG'
 export const GO_TO_JAIL = 'GO_TO_JAIL'
 export const BUY_HOUSE = 'BUY_HOUSE'
 export const RESET_AUCTION = 'RESET_AUCTION'
+export const GET_FREE_PARKING_MONEY = 'GET_FREE_PARKING_MONEY'
+export const CHANGE_SETUP_INDEX = 'CHANGE_SETUP_INDEX'
+export const SET_ICON = 'SET_ICON'
+export const RESET = 'RESET'
+export const CHANGE_GAMEMODE = 'CHANGE_GAMEMODE'
+export const COUNT_FUNDS = 'COUNT_FUNDS'
+
+export const countFunds = () => {
+	return {
+		type: COUNT_FUNDS
+	}
+}
+
+export const changeGamemode = (gamemode) => {
+	return {
+		type: CHANGE_GAMEMODE,
+		gamemode: gamemode
+	}
+}
+
+export const reset = () => {
+	return {
+		type: RESET
+	}
+}
+
+export const setIcon = (player, icon) => {
+	return {
+		type: SET_ICON,
+		player: player,
+		icon: icon
+	}
+}
+
+export const changeSetupIndex = (index) => {
+	return {
+		type: CHANGE_SETUP_INDEX,
+		index: index
+	}
+}
+
+export const getFreeParkingMoney = (player) => {
+	return {
+		type: GET_FREE_PARKING_MONEY,
+		player: player
+	}
+}
 
 export const resetAuction = () => {
 	return {

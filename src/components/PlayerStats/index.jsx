@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
-import { Modal } from 'react-bootstrap'
+import { Modal, Button } from 'react-bootstrap'
 
 import PropertyFeatures from '../PropertyFeatures'
 
 import { buyHouse, pay } from '../../redux/actions/game'
 import { connect } from 'react-redux'
+
+import './style.scss'
+
+import BootIcon from '../../containers/Setup/icons/boot.png'
+import CatIcon from '../../containers/Setup/icons/cat.png'
+import CupIcon from '../../containers/Setup/icons/cup.png'
+import HatstandIcon from '../../containers/Setup/icons/hatstand.png'
+import PhoneIcon from '../../containers/Setup/icons/phone.png'
+import SpoonIcon from '../../containers/Setup/icons/spoon.png'
 
 class PlayerStats extends Component {
     constructor(props) {
@@ -38,17 +47,17 @@ class PlayerStats extends Component {
     render() {
         let properties = this.props.properties.map(property => <PropertyFeatures property={ property } />)
         return(
-            <div>
-                <div>
+            <div className='stat'>
+                <div className='stats-container'>
                     { this.props.player.name }
                     <div>
                         { this.props.playerMoney }
                     </div>
+                    <div>
+                        <button className='player-property-button' onClick={ this.showProperties }>Properties</button>
+                    </div>
                 </div>
-                <div className='player-property-button'>
-                    <button onClick={ this.showProperties }>Properties</button>
-                </div>
-                <Modal show={ this.state.showProperties } onHide={ this.hideProperties }>
+                <Modal show={ this.state.showProperties } onHide={ this.hideProperties } >
                     <Modal.Header closeButton>
                         <Modal.Title>{ `Player ${this.props.id}` }</Modal.Title>
                     </Modal.Header>

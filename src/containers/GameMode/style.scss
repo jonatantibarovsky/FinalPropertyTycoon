@@ -1,0 +1,68 @@
+.MainBox {
+    margin: 2%;
+    padding-bottom: 2%;
+    border: 5px solid black;
+    align-items: center;
+}
+
+.HeaderBox {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.headerCentered {
+    position: absolute;
+    width: 50%;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 500%;
+    font-weight: bold;
+}
+
+.imageClass {
+    position: relative;
+    margin-top: -20%;
+    margin-bottom: -5%;
+}
+
+.App {
+    text-align: center;
+    background-color: #f3fff6;
+}
+
+.menu-button, .button {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    width: 170px;
+    height: 10%;
+    font-size: 200%;
+    border-radius: 12px;
+    box-shadow: 0 9px #999;
+    cursor: pointer;
+    outline: none;
+}
+
+.menu-button:hover, .button:hover {
+    background-color: black;
+    color: white;
+}
+  
+.menu-button:active, .button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.bottom-setup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.icon-text {
+    font-size: 20px;
+    font-weight: 1000;
+}

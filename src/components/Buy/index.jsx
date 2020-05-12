@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { Modal } from 'react-bootstrap'
+import './style.scss'
 
 import { hideBuyModal, pay, 
         showAuctionModal, setAuctionPlayers,
@@ -82,12 +82,12 @@ class Buy extends Component {
         const canBeBought = this.canBeBought()
         return (
             
-            <div>
+            <div className='buy'>
                 {(showBuyModal === true && canBeBought) &&
                     <div className='buy-modal'>
-                        <p>{ `Would you like to purchase ${currentProperty.name} for £${currentProperty.value}?` }</p>
-                        <button onClick={ () => this.buyProperty() }>YES</button>
-                        <button onClick={ () => this.showAuction() }>NO</button>
+                        <p className='buy-text'>{ `Would you like to purchase ${currentProperty.name} for £${currentProperty.value}?` }</p>
+                        <button className='button' onClick={ () => this.buyProperty() }>YES</button>
+                        <button className='button' onClick={ () => this.showAuction() }>NO</button>
                     </div>
                 }
             </div>

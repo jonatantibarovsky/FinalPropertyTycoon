@@ -4,6 +4,7 @@ import properties from '../../config/property'
 import potlucks from '../../config/potluck'
 import opportunityKnocks from '../../config/opportunityKnocks'
 
+import { changeSetupIndex } from '../../redux/actions/game'
 
 // style import
 import './style.scss'
@@ -11,6 +12,7 @@ import './style.scss'
 // component imports
 import GameContainer from '../GameContainer'
 import PlayerStatsContainer from '../PlayerStatsContainer'
+import { connect } from 'react-redux'
 
 class App extends Component {
 
@@ -30,18 +32,25 @@ class App extends Component {
         const shuffledPotLucks = this.shuffle(potlucks.potlucks)
         const shuffledOpportunityKnocks = this.shuffle(opportunityKnocks.opportunityKnocks)
         return(
-            <div className='board-container'>
-                <GameContainer 
-                    properties={ properties }
-                    potlucks={ shuffledPotLucks }
-                    opportunityKnocks={ shuffledOpportunityKnocks }
-                />
-                <PlayerStatsContainer 
-                    setMoveValue={ this.setMoveValue }
-                />
+            <div className='game-container'>
+                <div className='board-container'>
+                    <GameContainer 
+                        properties={ properties }
+                        potlucks={ shuffledPotLucks }
+                        opportunityKnocks={ shuffledOpportunityKnocks }
+                    />
+                    <PlayerStatsContainer 
+                        setMoveValue={ this.setMoveValue }
+                    />
+                
+                </div>
             </div>
         )
     }
 }
 
-export default App
+const mapDispatchToProps = {
+    changeSetupIndex
+}
+
+export default connect(null, mapDispatchToProps)(App)

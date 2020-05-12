@@ -8,6 +8,7 @@ class Property {
         this.rentIndex = 0
         this.rents= rents
         this.housePrice = housePrice
+        this.mortgaged = false
     }
 }
 

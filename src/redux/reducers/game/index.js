@@ -9,13 +9,16 @@ import { CHANGE_CURRENT_PLAYER, SET_DICE,
 		ADD_TO_FREE_PARKING, ADD_POTLUCK_JAILCARD,
 		REMOVE_POTLUCK_JAILCARD, ADD_OPPORTUNITY_JAILCARD,
 		REMOVE_OPPORTUNITY_JAILCARD, ADD_LOG, GO_TO_JAIL,
-		BUY_HOUSE, RESET_AUCTION } from '../../actions/game'
+		BUY_HOUSE, RESET_AUCTION,
+		GET_FREE_PARKING_MONEY,
+		CHANGE_SETUP_INDEX, SET_ICON,
+		RESET, CHANGE_GAMEMODE,
+		COUNT_FUNDS } from '../../actions/game'
 
 import { Player } from '../../../models/player'
 
 const initialState = {
 	players: [],
-	numberOfPlayers: 4,
 	currentPlayer: 1,
 	dice: [],
 	showBuyModal: false,
@@ -23,7 +26,10 @@ const initialState = {
 	rolled: false,
 	playersInAuction: [],
 	freeParking: 0,
-	gameLog: [`Player 1's turn`]
+	gameLog: [`Player 1's turn`],
+	setup: 0,
+	gameMode: 0,
+	winner: null,
 }
 
 const changePlayerNumber = (players, number) => {
@@ -41,6 +47,63 @@ const changePlayerNumber = (players, number) => {
 
 export default (state = initialState, action) => {
 	switch (action.type) {
+		case COUNT_FUNDS:
+			let funds = state.players.map(player => {
+				let money = player.money
+				const properties = player.properties
+				properties.forEach(property => {
+					money += property.value
+					const housePrice = property.housePrice
+					if (property.rentIndex > 1) {
+						let houseValue = housePrice * property.rentIndex
+						money += houseValue
+					}
+
+				})
+				return money
+			})
+			let max = Math.max(...funds)
+			let winnerIndex = funds.findIndex(element => element === max)
+			return {
+				...state,
+				playerFunds: funds,
+				winner: winnerIndex
+			}
+		case CHANGE_GAMEMODE:
+			return {
+				...state,
+				gameMode: action.gamemode
+			}
+		case RESET:
+			return {
+				...initialState
+			}
+		case SET_ICON:
+			let icons = state.players.map(player => {
+				if (player.id === action.player) {
+					player.icon = action.icon
+				}
+				return player
+			})
+			return {
+				...state,
+				players: icons
+			}
+		case CHANGE_SETUP_INDEX:
+			return {
+				...state,
+				setup: action.index
+			}
+		case GET_FREE_PARKING_MONEY:
+			let freeParkingPlayers = state.players.map(player => {
+				if (player.id === action.player) {
+					player.getMoney(state.freeParking)
+				}
+			})
+			return {
+				...state,
+				players: freeParkingPlayers
+			}
 		case RESET_AUCTION:
 			return {
 				...state,
@@ -69,7 +132,7 @@ export default (state = initialState, action) => {
 				players: newPlayers
 			}
 		case CHANGE_CURRENT_PLAYER:
-			if (state.currentPlayer < state.numberOfPlayers) {
+			if (state.currentPlayer < state.players.length) {
 				let nextPlayer = state.currentPlayer + 1
 				return {
 					...state,
@@ -132,7 +195,12 @@ export default (state = initialState, action) => {
 		case PAY:
 			let players = state.players.map(player => {
 				if (player.id === action.playerID) {
-					player.pay(action.value)
+					if (player.money < action.value ){
+						alert('Not enough money to pay, you lose the game.')
+
+					} else {
+						player.pay(action.value)
+					}
 				}
 				return player
 			})
@@ -188,7 +256,6 @@ export default (state = initialState, action) => {
 				freeParking: action.value
 			}
 		case ADD_POTLUCK_JAILCARD:
-			console.log('ADD_POTLUCK_JAILCARD')
 			let potluckJailPlayers = state.players.map(player => {
 				if (player.id === action.player.id) {
 					player.potluckJailCard = true
@@ -200,7 +267,6 @@ export default (state = initialState, action) => {
 				players: potluckJailPlayers
 			}
 		case ADD_OPPORTUNITY_JAILCARD:
-			console.log('ADD_OPPORTUNITY_JAILCARD')
 			let opportunityJailPlayers = state.players.map(player => {
 				if (player.id === action.player.id) {
 					player.opportunityJailCard = true
@@ -212,14 +278,13 @@ export default (state = initialState, action) => {
 				players: opportunityJailPlayers
 			}
 		case GO_TO_JAIL:
-			console.log('gotojail')
 			let jailedPlayers = state.players.map(player => {
 				if (player.id === action.player.id) {
 					player.position = 10
 					player.jail = true
 					player.jailroll = 0
-					console.log('player in jail')
-					console.log(player)
+					('player in jail')
+					(player)
 				}
 				return player
 			})

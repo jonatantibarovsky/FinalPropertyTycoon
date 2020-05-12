@@ -1,33 +1,38 @@
-.button {
+.exit-button {
+    margin-bottom: 50px;
+    margin-left: 30px;
     background-color: white;
     color: black;
     border: 2px solid black;
-    width: 70px;
+    width: 100px;
     height: 10%;
-    font-size: 10px;
+    font-size: 120%;
     border-radius: 12px;
     box-shadow: 0 9px #999;
     cursor: pointer;
     outline: none;
 }
 
-.button:hover {
+.exit-button:hover{
     background-color: black;
     color: white;
 }
   
-.button:active{
+.exit-button:active {
     box-shadow: 0 5px #666;
     transform: translateY(4px);
 }
 
-.buy-modal {
+.play-stats-cont {
+    margin-top: 50px;
+    margin-left: 30px;
+    width: 350px;
+    background-color: salmon;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.buy-text {
-    font-size: 15px;
+.playerStats {
+    margin-top: 20px;
 }

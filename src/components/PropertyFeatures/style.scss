@@ -1,33 +1,29 @@
-.control-board {
-    max-width: 300px;
-}
-
-.control-buttons {
+.prop-features {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly
-    
+    align-items: center;
+    justify-content: space-between;
 }
 
-.end {
+.stats-button {
     background-color: white;
     color: black;
     border: 2px solid black;
-    width: 100px;
-    height: 10%;
-    font-size: 200%;
+    width: 120px;
+    height: 35px;
+    font-size: 12px;
     border-radius: 12px;
     box-shadow: 0 9px #999;
     cursor: pointer;
     outline: none;
 }
 
-.end:hover {
+.stats-button:hover {
     background-color: black;
     color: white;
 }
   
-.end:active{
+.stats-button:active{
     box-shadow: 0 5px #666;
     transform: translateY(4px);
 }
