@@ -1,16 +1,9 @@
-Game has 4 players for now, change to 2-6 or 2-8 players depending on specs
+# Folder structure
 
+src folder containts the whole application, including all components and logic
 
-TODO:
-    -setting number of players + icons
-    -implement houses/hotels 
-        if all properties are ownes rent is doubled
-        read spec
-    -implement jail
-        read spec
-    -implement free parking money
-        read spec
-    -what happens when player has no money
-    -mortgaging
-    -2nd gamemode (time limit)
+Components folder contains the React components.
+Container folder contains React components that contain other components.
+In the model folder we have the 3 main classes: Player, Card, Property
+Redux folder contains the redux store, the reducer and all the actions.
     
