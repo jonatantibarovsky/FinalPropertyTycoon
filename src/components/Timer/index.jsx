@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import { countFunds } from '../../redux/actions/game'
 
+/**
+ * Timer component
+ */
 class Timer extends Component {
     constructor(props) {
         super(props)

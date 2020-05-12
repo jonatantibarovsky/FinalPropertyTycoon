@@ -1,3 +1,6 @@
+// REDUX actions for the redux store
+
+
 export const CHANGE_CURRENT_PLAYER = 'CHANGE_CURRENT_PLAYER'
 export const SET_DICE = 'SET_DICE'
 export const CHANGE_PLAYERS_NUMBER = 'CHANGE_PLAYERS_NUMBER'

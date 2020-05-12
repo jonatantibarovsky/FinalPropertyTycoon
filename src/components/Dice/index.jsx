@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
-
 import { setDice, updatePlayerPosition,
         showBuyModal, setRolledTrue,
         addLog, goToJail,
         pay, getMoney,
         getFreeParkingMoney } from '../../redux/actions/game'
 import { connect } from 'react-redux'
-
 import './style.scss'
 
+
+/**
+ * Dice component
+ */
 class Dice extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             diceOne: null,
             diceTwo: null,
@@ -32,6 +33,10 @@ class Dice extends Component {
         }
     }
 
+    /**
+     *  checks the current square and executes things according to the square's group
+     * 
+     */
     checkSquare = (square, player) => {
         const currentPlayerID = this.props.gameState.currentPlayer
         const currentPlayer = this.props.gameState.players[currentPlayerID - 1]
@@ -92,6 +97,11 @@ class Dice extends Component {
         }
     }
 
+    /**
+     * Handles the Roll dice button click
+     * Checks double rolls, player has another turn if they roll a double.
+     * If they roll another double they go to jail
+     */
     async handleClick() {
         if (!this.props.gameState.rolled) {
             let diceOne = Math.floor(Math.random() * 6) + 1

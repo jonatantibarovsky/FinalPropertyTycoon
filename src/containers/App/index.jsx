@@ -14,6 +14,8 @@ import GameContainer from '../GameContainer'
 import PlayerStatsContainer from '../PlayerStatsContainer'
 import { connect } from 'react-redux'
 
+
+// App container component
 class App extends Component {
 
     // modern version of the Fisher-Yates shuffle algorithm

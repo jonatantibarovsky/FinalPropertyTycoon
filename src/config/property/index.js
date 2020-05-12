@@ -1,3 +1,8 @@
+/**
+ * Config file with all the properties
+ */
+
+
 import Property from '../../models/property'
 
 const property1 = new Property(0, 'Go', 'corner', null, [null], null)

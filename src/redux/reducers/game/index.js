@@ -1,3 +1,5 @@
+// REDUCER for the redux store, stores the state of the application and updates it according to the actions that are exectued
+
 import { CHANGE_CURRENT_PLAYER, SET_DICE, 
 		CHANGE_PLAYERS_NUMBER, UPDATE_PLAYER_POSITION,
 		SHOW_BUY_MODAL, HIDE_BUY_MODAL,
@@ -17,6 +19,8 @@ import { CHANGE_CURRENT_PLAYER, SET_DICE,
 
 import { Player } from '../../../models/player'
 
+
+// Initial State of the application
 const initialState = {
 	players: [],
 	currentPlayer: 1,

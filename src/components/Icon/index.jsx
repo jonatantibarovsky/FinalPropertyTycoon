@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-
 import './style.scss'
 
+/**
+ * Icon component
+ */
 class Icon extends Component {
     render() {
         return(

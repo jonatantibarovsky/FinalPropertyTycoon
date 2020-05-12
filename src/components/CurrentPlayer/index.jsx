@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import './style.scss'
 
+/**
+ * CurrentPlayer component, shows the current player
+ */
 class CurrentPlayer extends Component {
     constructor(props) {
         super(props)

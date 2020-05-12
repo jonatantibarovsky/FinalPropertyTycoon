@@ -6,13 +6,25 @@ import { adjustPlayerPosition, getMoney,
         addOpportunityJailcard, addPotluckJailcard,
         goToJail } from '../../redux/actions/game'
 
+
 class Card {
+
+    /**
+     * 
+     * @param text - Card text
+     * @param method - Method number
+     */
     constructor(text, method) {
         this.text = text
         this.method = method
 
     }
 
+    /**
+     *  Adjusts a Player object's position to a specific position according to the card text
+     * 
+     * @param player - Player object id
+     */
     adjustPosition = (player) => {
         if (this.text === 'Go back to Crapper Street') {
             store.dispatch(adjustPlayerPosition(player, 1))
@@ -28,6 +40,11 @@ class Card {
         }
     }
 
+    /**
+     *  Player object pays money to the bank according to the card text
+     * 
+     * @param player - Player object id
+     */
     pay = (player) => {
         if (this.text === 'Pay bill for text books of £100') {
             store.dispatch(pay(player, 100))
@@ -46,6 +63,11 @@ class Card {
         }
     }
 
+    /**
+     *  Player objects money increases by the amount shown on the card text
+     * 
+     * @param player - Player object id
+     */
     increaseMoney = (player) => {
         if (this.text === 'You inherit £100') {
             store.dispatch(getMoney(player, 100))
@@ -70,6 +92,11 @@ class Card {
         }
     }
 
+    /**
+     *  Add jail card to player object
+     * 
+     * @param player - Player object id
+     */
     addJailCard = (player) => {
         if (this.text === 'Get out of jail free / Opportunity') {
             store.dispatch(addOpportunityJailcard(player))
@@ -78,11 +105,22 @@ class Card {
         }
     }
 
+    /**
+     *  Move player object to jail
+     * 
+     * @param player - Player object id
+     */
     goToJail = (player) => {
         ('go to jail from card class')
         store.dispatch(goToJail(player))
     }
 
+    /**
+     *  Advances player to a specific position according to the card text and check if
+     *  moving the player makes them pass GO, if they pass GO they get 200 pounds.
+     * 
+     * @param player - Player object id
+     */
     advanceIfPassGo = (player) => {
         if (this.text === 'Advance to Han Xin Gardens. If you pass GO, collect £200') {
             if (player.position < 25) {
@@ -102,6 +140,13 @@ class Card {
         }
     }
 
+    /**
+     *  Executes the right function according to the Card object's method attribute
+     * 
+     * @param card - card object
+     * @param playerID - player object id
+     * @param player - Player object
+     */
     checkMethod = (card, playerID, player) => {
         switch (card.method) {
             case 1:

@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import './style.scss'
-
 import { removeAuctionPlayer, pay,
         hideAuctionModal, addLog,
         resetAuction } from '../../redux/actions/game'
 
+
+/**
+ * Auction component
+ */
 class Auction extends Component {
+
     constructor(props) {
         super(props)
-
         this.state = {
             highestBidder: null,
             highestBid: 0,
@@ -18,14 +20,19 @@ class Auction extends Component {
             currentBid: ''
         }
     }
+
+    // handles button change, sets state to the current bidder
     handleChange = (event) => {
         this.setState({
             currentBid: event.target.value
         })
     }
 
+
+    /**
+     * Player bids on property thats under auction
+     */
     bid = () => {
-        //TODO: check if player has enough money to bid
         const { currentBid, highestBid, highestBidder, currentBidder } = this.state
         const bidAmount = parseInt(currentBid)
         if (Number.isInteger(bidAmount) && bidAmount !== 0) {
@@ -44,6 +51,9 @@ class Auction extends Component {
         
     }
 
+    /**
+     * Player passes on property that is currently under auction
+     */
     pass = () => {
         const currentPlayerID = this.props.gameState.currentPlayer
         const currentPlayer = this.props.gameState.players[currentPlayerID - 1]

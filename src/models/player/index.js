@@ -1,4 +1,11 @@
 class Player {
+
+    /**
+     * Constructor for Player class
+     * 
+     * @param id - player id
+     * @param name  - player name
+     */
     constructor(id, name) {
         this.id = id
         this.name = name
@@ -13,11 +20,23 @@ class Player {
         this.icon = null
     }
 
-    // adjusts player's position to a specific position
+    /**
+     * Adjusts Player's position according to the arg position
+     * 
+     * @param position - player position
+     */
     adjustPosition = (position) => {
         this.position = position
     }
 
+    /**
+     * Updates Player's position according to the arg value.
+     * Checks if Player is in jail, if true add 1 to jailroll.
+     * If jailroll is 3 and Player is in jail then remove Player from jail
+     * Check if Player passes go, if true add 200 pounds to their money
+     * 
+     * @param value - how many values to move the Player
+     */
     updatePosition = (value) => {
         if (this.jail && this.jailroll < 3) {
             this.jailroll += 1
@@ -34,20 +53,39 @@ class Player {
         }
     }
 
+    /**
+     * Get paid function
+     * 
+     * @param money - how much Player is getting paid
+     */
     getMoney = (money) => {
         this.money += money
     }
 
+    /**
+     * Pay function
+     * 
+     * @param money - how much Player is paying
+     */
     pay = (value) => {
         this.money -= value
     }
 
+    /**
+     * Sets Player to go to jail
+     * 
+     */
     goToJail = () => {
         this.position = 10
         this.jail = true
         this.jailroll = 0
     }
 
+    /**
+     * Counts the properties in the group of arg property which are owned by the current Player
+     * 
+     * @param property - Property objets
+     */
     countPropertiesInGroup = (property) => {
         let group = property.group
         let owned
@@ -59,6 +97,11 @@ class Player {
         return owned.length
     }
 
+    /**
+     * Checks if the property's group is owned by the Player
+     * 
+     * @param property - Property objets
+     */
     checkCompleteGroupOwned = (property) => {
         const groupToCheck = property.group
         if (this.properties) {
@@ -85,6 +128,13 @@ class Player {
         }
     }
 
+    /**
+     * Develops a house on the property argument
+     * Checks if the group of the property is owned by the player wanting to develop a house
+     * Checks for maximum number of houses on the property
+     * 
+     * @param property - Property objets
+     */
     developProperty = (property) => {
         let ownership = this.checkCompleteGroupOwned(property)
         (ownership)

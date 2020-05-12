@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+/**
+ * Player component, shows up on the board in the squares
+ */
 class Player extends Component {
     constructor(props) {
         super(props)

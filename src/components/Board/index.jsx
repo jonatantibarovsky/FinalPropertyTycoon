@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import "../styles/board.scss"
-
-// component imports
 import Square from '../Square'
 import ControlContainer from '../../containers/ControlContainer'
 
+/**
+ * Board component
+ */
 class Board extends Component {
     constructor(props) {
         super(props)

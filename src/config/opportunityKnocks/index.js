@@ -1,3 +1,7 @@
+/**
+ * Config file with all the opportunity knocks cards
+ */
+
 import Card from '../../models/card'
 
 const opportunity1 = new Card('Bank pays you divided of £50', 3)

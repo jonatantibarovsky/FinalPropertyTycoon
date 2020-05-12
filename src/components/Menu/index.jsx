@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { changePlayersCount, changeSetupIndex } from '../../redux/actions/game'
 import './style.css'
-
 import MainImage from './startmenu.png'
 
+/**
+ * Main Menu component
+ */
 class StartMenu extends Component {
     constructor(props) {
         super(props)

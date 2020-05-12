@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-
 import Player from '../Player'
-
 import "../styles/board.scss"
 
 const RightColorBlock = styled.section`
@@ -31,6 +29,9 @@ const BottomColorBlock = styled.section`
     border-bottom: 1px solid black;
 `
 
+/**
+ * Square component, each property in the game is a square component
+ */
 class Square extends Component {
     constructor(props) {
         super(props)

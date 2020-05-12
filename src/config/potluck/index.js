@@ -1,3 +1,8 @@
+/**
+ * Config file with all the pot luck cards
+ */
+
+
 import Card from '../../models/card'
 
 const potluck1 = new Card('You inherit £100', 3)

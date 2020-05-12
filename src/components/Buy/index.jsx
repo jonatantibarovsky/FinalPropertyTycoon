@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import './style.scss'
-
 import { hideBuyModal, pay, 
         showAuctionModal, setAuctionPlayers,
         addLog} from '../../redux/actions/game'
 
+/**
+ * Buy modal for buying properties when a player lands on them
+ */
 class Buy extends Component {
     constructor(props) {
         super(props)
     }
 
+    // checks if property can be bought
     canBeBought = () => {
         const currentPlayerID = this.props.gameState.currentPlayer
         const currentPlayer = this.props.gameState.players[currentPlayerID - 1]
@@ -25,6 +27,7 @@ class Buy extends Component {
 
     }
 
+    // buys the property and adds it to the Players property array
     buyProperty = () => {
         const currentPlayerID = this.props.gameState.currentPlayer
         const currentPlayer = this.props.gameState.players[currentPlayerID - 1]
@@ -63,6 +66,7 @@ class Buy extends Component {
         }
     }
 
+    // shows auction modal if player chooses not to buy the property
     showAuction = () => {
         const currentPlayerID = this.props.gameState.currentPlayer
         const currentPlayer = this.props.gameState.players[currentPlayerID - 1]

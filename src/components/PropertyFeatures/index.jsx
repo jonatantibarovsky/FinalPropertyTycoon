@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-
 import { getMoney, pay,
         addLog } from '../../redux/actions/game'
 import { connect } from 'react-redux'
-
 import './style.scss'
 
+/**
+ * Players are able to mortgage, unmortage, buy or sell houses in this modal
+ */
 class PropertyFeatures extends Component {
     constructor(props) {
         super(props)
@@ -15,6 +16,9 @@ class PropertyFeatures extends Component {
         }
     }
 
+    /**
+     * Checks if property is devleoped, if true returns true, otherwise returns false
+     */
     isDeveloped = (property) => {
         const check = property.owner.checkCompleteGroupOwned(property)
         
@@ -25,6 +29,9 @@ class PropertyFeatures extends Component {
         }   
     }
 
+    /**
+     * Unmortgage property
+     */
     unmortgage = (property) => {
         property.mortgaged = false
         const owner = property.owner
@@ -56,6 +63,7 @@ class PropertyFeatures extends Component {
         this.props.addLog(`${property.owner.name} has sold a house on ${property.name}`)
     }
 
+    // buy house
     buyHouse = (property) => {
         property.rentIndex += 1
         this.props.addLog(`${property.owner.name} has bought a house on ${property.name}`)

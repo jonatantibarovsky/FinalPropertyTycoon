@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import { Modal } from 'react-bootstrap'
-
 import './style.scss'
 
+/**
+ * Game log component, shows up in the middle of the board.
+ * Shows the current state of the game
+ */
 class GameLog extends Component {
     constructor(props) {
         super(props)

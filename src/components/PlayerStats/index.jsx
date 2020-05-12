@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-
 import PropertyFeatures from '../PropertyFeatures'
-
 import { buyHouse, pay } from '../../redux/actions/game'
 import { connect } from 'react-redux'
-
 import './style.scss'
-
 import BootIcon from '../../containers/Setup/icons/boot.png'
 import CatIcon from '../../containers/Setup/icons/cat.png'
 import CupIcon from '../../containers/Setup/icons/cup.png'
 import HatstandIcon from '../../containers/Setup/icons/hatstand.png'
 import PhoneIcon from '../../containers/Setup/icons/phone.png'
+
 import SpoonIcon from '../../containers/Setup/icons/spoon.png'
 
+
+/**
+ * PlayerStats component, shows information about the player
+ */
 class PlayerStats extends Component {
     constructor(props) {
         super(props)
